@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時數計算器</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>⏰ 時數計算器</h1>
+            
+            <div class="time-section">
+                <div class="section-title">開始時間</div>
+                <div class="time-inputs">
+                    <div class="input-group">
+                        <label class="input-label">時</label>
+                        <input type="number" v-model.number="startHour" min="1" max="12" placeholder="12">
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="input-group">
+                        <label class="input-label">分</label>
+                        <input type="number" v-model.number="startMinute" min="0" max="59" placeholder="00">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">上下午</label>
+                        <select v-model="startPeriod">
+                            <option value="AM">上午</option>
+                            <option value="PM">下午</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="time-section">
+                <div class="section-title">結束時間</div>
+                <div class="time-inputs">
+                    <div class="input-group">
+                        <label class="input-label">時</label>
+                        <input type="number" v-model.number="endHour" min="1" max="12" placeholder="12">
+                    </div>
+                    <div class="separator">:</div>
+                    <div class="input-group">
+                        <label class="input-label">分</label>
+                        <input type="number" v-model.number="endMinute" min="0" max="59" placeholder="00">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">上下午</label>
+                        <select v-model="endPeriod">
+                            <option value="AM">上午</option>
+                            <option value="PM">下午</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button class="calculate-btn" @click="calculateTime">
+                📊 計算總時數
+            </button>
+
+            <div v-if="result" class="result" :class="{ error: isError }">
+                {{ result }}
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
